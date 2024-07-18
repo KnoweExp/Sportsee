@@ -1,14 +1,39 @@
 import React from "react";
 import {
-  LineChart,
+  ComposedChart,
   Line,
-  CartesianGrid,
+  Area,
   XAxis,
   YAxis,
-  Bar,
+  CartesianGrid,
+  Tooltip,
+  LineChart,
+  Legend,
+  Radar,
+  PieChart,
+  Pie,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  DefaultLegendContent,
   BarChart,
+  Bar,
+  Rectangle,
+  Cell,
   ResponsiveContainer,
 } from "recharts";
+import { 
+  activityData, 
+  sessionData, 
+  performanceData, 
+  scoreData, 
+  nutritionData,
+  activityDataFalse,
+} from '../mockData.js';
+import PerformanceChart from './performanceChart.jsx';
+import ScoreChart from './ScoreChart.jsx';
+import ActivityChart from './ActivityChart.jsx';
 
 const data = [
   { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
@@ -19,32 +44,53 @@ const data = [
 const ContainerChart = () => {
   return (
     <div className="ContainerChart">
-      <div className="Left_part">
-        <div className="Long_Top">
-          <LineChart width={400} height={400} data={data}>
-            <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-          </LineChart>
-        </div>
-        <div className="Triple_bottom">
-          {[1, 2, 3].map((_, index) => (
-            <ResponsiveContainer key={index} width="100%" height={100}>
-              <BarChart data={data}>
-                <Bar dataKey="uv" fill="#8884d8" />
-                <XAxis dataKey="name" />
-                <YAxis />
-              </BarChart>
-            </ResponsiveContainer>
-          ))}
+      <div className="main-charts-section">
+        <ActivityChart/>
+        <div className="detailed-metrics-charts">
+        <h2>Durée moyenne des sessions</h2>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={sessionData}>
+        <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="day" />
+          <Line type="monotone" dataKey="duration" stroke="#FF0000" />
+        </LineChart>
+      </ResponsiveContainer>
+      <PerformanceChart/>
+      <h2>Score</h2>
+      <ScoreChart/>
+            
         </div>
       </div>
-      <div className="Quad_Right">
-        <p>Quad right</p>
-        <p>Quad right</p>
-        <p>Quad right</p>
-        <p>Quad right</p>
-      </div>
+      <div className="nutrition-stats-section">
+        <div className="info-box"><img src="calories-icon.svg" alt="calories icon" />
+        <div className="info-text">
+                <p>1,930kCal</p>
+                <p>Calories</p>
+            </div>
+            </div>
+        <div className="info-box"><img src="protein-icon.svg" alt="protein icon" />
+        <div className="info-text">
+                <p>155g</p>
+                <p>Protéines</p>
+            </div>
+        </div>
+        <div className="info-box"><img src="carbs-icon.svg" alt="carbs icon" />
+        <div className="info-text">
+                <p>290g</p>
+                <p>Glucides</p>
+            </div>
+        </div>
+        <div className="info-box"><img src="fat-icon.svg" alt="fat icon" />
+        <div className="info-text">
+                <p>50g</p>
+                <p>Lipides</p>
+            </div>
+        </div>
+      
+    </div>
     </div>
   );
 };
+
 
 export default ContainerChart;
