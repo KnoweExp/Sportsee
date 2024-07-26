@@ -1,45 +1,21 @@
 import React from "react";
-import {
-  ComposedChart,
-  Line,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  LineChart,
-  Legend,
-  Radar,
-  PieChart,
-  Pie,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  DefaultLegendContent,
-  BarChart,
-  Bar,
-  Rectangle,
-  Cell,
-  ResponsiveContainer,
-} from "recharts";
-import { 
-  activityData, 
-  sessionData, 
-  performanceData, 
-  scoreData, 
-  nutritionData,
-  activityDataFalse,
-} from '../mockData.js';
+
 import PerformanceChart from './performanceChart.jsx';
 import ScoreChart from './ScoreChart.jsx';
 import ActivityChart from './ActivityChart.jsx';
+import SessionChart from './SessionChart.jsx';
 
-const data = [
-  { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
-  { name: "Page B", uv: 300, pv: 3300, amt: 5400 },
-  { name: "Page C", uv: 900, pv: 4300, amt: 5400 },
-];
+export const CustomTooltip = ({ active, payload}) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p>{`Durée : ${payload[0].value} minutes`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const ContainerChart = () => {
   return (
@@ -47,16 +23,8 @@ const ContainerChart = () => {
       <div className="main-charts-section">
         <ActivityChart/>
         <div className="detailed-metrics-charts">
-        <h2>Durée moyenne des sessions</h2>
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={sessionData}>
-        <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <Line type="monotone" dataKey="duration" stroke="#FF0000" />
-        </LineChart>
-      </ResponsiveContainer>
+      <SessionChart/>
       <PerformanceChart/>
-      <h2>Score</h2>
       <ScoreChart/>
             
         </div>

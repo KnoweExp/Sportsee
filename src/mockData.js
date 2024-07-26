@@ -76,7 +76,8 @@ export const performanceData = [
   ];
 
 export const scoreData = [
-    { name: 'Score', value: 12 }
+  { name: 'Reste', value: 88 },
+  { name: 'Score', value: 12 }
   ];
 
 export const nutritionData = {

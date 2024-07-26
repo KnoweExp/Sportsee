@@ -1,41 +1,47 @@
 import React from "react";  
 import {
-    ComposedChart,
-    Line,
-    Area,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
-    LineChart,
     Legend,
-    Radar,
-    PieChart,
-    Pie,
-    RadarChart,
-    PolarGrid,
-    PolarAngleAxis,
-    PolarRadiusAxis,
-    DefaultLegendContent,
     BarChart,
     Bar,
-    Rectangle,
-    Cell,
     ResponsiveContainer,
   } from "recharts";
 
 import { 
-    activityDataFalse, 
+    activityData
   } from '../mockData.js';
 
 const ActivityChart = () => {
     return (
     <div className="ActivityChart">
     <ResponsiveContainer width="100%" height="100%">
-  <LineChart width={300} height={100} data={activityDataFalse}>
-    <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
-  </LineChart>
-</ResponsiveContainer>
+        <BarChart
+          width={500}
+          height={300}
+          data={activityData}
+          margin={{
+            top: 20,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid vertical={false}/>
+          <XAxis dataKey="day" />
+          <YAxis yAxisId="right" orientation="right" stroke="#8884d8" />
+          <YAxis 
+          yAxisId="left" 
+          orientation="left" 
+          tickFormatter={(value) => ``}
+        />
+          <Tooltip />
+          <Bar yAxisId="right" dataKey="kilogram" fill="#282D30" />
+          <Bar yAxisId="left" dataKey="calories" fill="#E60000" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
     )
 }

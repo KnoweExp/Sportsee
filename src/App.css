@@ -1,18 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,47 +9,26 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 .app {
   display: flex;
   flex-direction: column;
+  padding-inline: 5rem;
 }
 
 .header {
-  background: #f0f0f0;
   padding: 20px;
-  text-align: center;
+  text-align: left;
+}
+
+.highlight {
+  color: red;
 }
 
 .main-content {
   display: flex;
 }
 
-.sidebar {
-  width: 60px;
-  background: #282c34;
-}
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 20px;
-  text-align: center;
-  color: white;
-}
-
-.dashboard {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-}
 
 /* .chart-container {
   width: 45%;
@@ -82,18 +46,6 @@
   background: #f0f0f0;
   padding: 20px;
   text-align: center;
-}
-
-.score-indicator {
-  width: 45%;
-  margin: 20px;
-}
-
-.score-circle {
-  background: #f0f0f0;
-  border-radius: 50%;
-  text-align: center;
-  padding: 20px;
 }
 
 .ContainerChart {
@@ -115,28 +67,34 @@
 .detailed-metrics-charts p {
   display: flex;
   gap: 15px;
-  border: rgb(68, 0, 255) solid 1px;
+  
 }
+
+.SessionChart {
+  background-color: red;
+  color: #FFFFFF;
+  border-radius: 10px;
+}
+
+.SessionChart h2{
+  margin-left: 2em;
+}
+
+
 
 .ActivityChart {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: red solid 1px;
   height: 300px;
+  background-color: #FBFBFB;
+  margin-bottom: 2rem;
+  border-radius: 10px;
 }
 
 .nutrition-stats-section {
     padding: 20px;
 }
-
-/* .nutrition-stats-section div {
-background-color: fbfbfb;
-border: black solid 1px;
-height: 9em;
-width: 8em;
-border-radius: 10px;
-} */
 
 .column {
   display: flex;
@@ -148,7 +106,6 @@ border-radius: 10px;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  /* background-color: #c7c7c7; */
   justify-content: center;
   background-color: #FBFBFB;
   gap: 10px;
@@ -184,27 +141,27 @@ border-radius: 10px;
 }
 
 .ScoreChart {
+  background-color: #FBFBFB;
+}
 
+.ScoreChart h2{
+  margin-left: 2em;
+}
+
+.ScoreChart p{
+  position: relative;
+  top: 200px;
+  left: 150px;
 }
 
 .chart-container {
   width: 100%;
   height: 100%;
+  margin-right: 2em;
 }
 
 .PerformanceChart {
-  background-color: #282D30; /* Set your desired background color */
-  padding: 20px; /* Optional padding */
-  border-radius: 10px; /* Optional rounded corners */
+  background-color: #282D30;
+  border-radius: 10px;
 }
 
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
