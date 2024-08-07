@@ -1,4 +1,4 @@
-import React from "react";  
+import React, { useEffect, useState }from "react";  
 import {
     XAxis,
     YAxis,
@@ -10,11 +10,42 @@ import {
     ResponsiveContainer,
   } from "recharts";
 
-import { 
-    activityData
-  } from '../mockData.js';
+  import { activityData, averageSessionsData, performanceData, mainData } from '../mockData';
 
-const ActivityChart = () => {
+  const ActivityChart = ({ userId }) => {
+    const [activityData, setActivityData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!userId) {
+      setError("userId is undefined");
+      console.error("userId is undefined");
+      return;
+    }
+
+    fetch(`http://localhost:3000/user/${userId}/activity`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (!data.data.sessions) {
+          throw new Error("No sessions data found");
+        }
+        setActivityData(data.data.sessions);
+      })
+      .catch(error => {
+        setError(error.message);
+        console.error('Error fetching user activity:', error);
+      });
+  }, [userId]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
     return (
     <div className="ActivityChart">
     <ResponsiveContainer width="100%" height="100%">
@@ -45,4 +76,5 @@ const ActivityChart = () => {
     </div>
     )
 }
+
 export default ActivityChart;

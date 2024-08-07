@@ -104,21 +104,20 @@
 
 .info-box {
   display: flex;
-  align-items: center;
   margin-bottom: 20px;
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
   background-color: #FBFBFB;
   gap: 10px;
+  height: 6em;
   width: 15em;
-  height: 10em;
   border-radius: 10px;
 }
 
 .info-box img {
   width: 50px; 
   height: 50px; 
-  margin-right: 10px;
-  margin-top: 20px;
+  margin-left: 15%;
 }
  
 .info-text {

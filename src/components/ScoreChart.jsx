@@ -4,37 +4,80 @@ import {
     Cell,
     ResponsiveContainer,
   } from "recharts";
-import React from 'react';  
+import React, { useState, useEffect }  from 'react';  
 import { 
-    scoreData, 
+    userMainData, 
   } from '../mockData.js';
+  import { formatUserMainData } from '../utils/dataFormatters';
 
-  const COLORS = ['#FFFFFF', '#E60000'];
+const COLORS = ['#FFFFFF', '#E60000'];
 
-const ScoreChart = () => {
+const ScoreChart = ({ userId}) => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const rawUserData = userMainData.find(user => user.id === userId);
+    if (rawUserData) {
+      const formattedData = formatUserMainData(rawUserData);
+      setUserData(formattedData);
+    }
+  }, [userId]);
+
+  if (!userData) {
+    return <div>Aucune donnée disponible pour cet utilisateur.</div>;
+  }
+
+  const score = userData.todayScore;
+  const scorePercentage = Math.round(score * 100);
+
     return (
         <div className="chart-container ScoreChart">
           <div>
             <h2>Score</h2>
           </div>
-          <p>objectif</p>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie
-              data={scoreData}
+              data={[{ value: score }, { value: 1 - score }]}
               cx="50%"
               cy="50%"
               startAngle={90}
               endAngle={-270}
-              innerRadius={60}
-              outerRadius={80}
+              innerRadius={90}
+              outerRadius={100}
               fill="#E60000"
               dataKey="value"
             >
-              {scoreData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
+              <Cell fill={COLORS[0]} />
+              <Cell fill={COLORS[1]} />
             </Pie>
+            <text
+            x="50%"
+            y="50%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            style={{ fontSize: '26px', fontWeight: 'bold' }}
+          >
+            {`${scorePercentage}%`}
+          </text>
+          <text
+            x="50%"
+            y="60%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            style={{ fontSize: '16px' }}
+          >
+            de votre
+          </text>
+          <text
+            x="50%"
+            y="70%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            style={{ fontSize: '16px' }}
+          >
+            objectif
+          </text>
           </PieChart>
         </ResponsiveContainer>
         </div>

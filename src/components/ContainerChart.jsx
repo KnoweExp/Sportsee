@@ -18,14 +18,16 @@ export const CustomTooltip = ({ active, payload}) => {
 };
 
 const ContainerChart = () => {
+  const userId = 18;
+
   return (
     <div className="ContainerChart">
       <div className="main-charts-section">
-        <ActivityChart/>
+        <ActivityChart userId={userId}/>
         <div className="detailed-metrics-charts">
-      <SessionChart/>
-      <PerformanceChart/>
-      <ScoreChart/>
+      <SessionChart userId={userId}/>
+      <PerformanceChart userId={userId}/>
+      <ScoreChart userId={userId}/>
             
         </div>
       </div>
