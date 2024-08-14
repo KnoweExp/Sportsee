@@ -12,22 +12,13 @@ import {
 
 const COLORS = ['#FFFFFF', '#E60000'];
 
-const ScoreChart = ({ userId}) => {
-  const [userData, setUserData] = useState(null);
+const ScoreChart = ({ data }) => {
 
-  useEffect(() => {
-    const rawUserData = userMainData.find(user => user.id === userId);
-    if (rawUserData) {
-      const formattedData = formatUserMainData(rawUserData);
-      setUserData(formattedData);
-    }
-  }, [userId]);
-
-  if (!userData) {
+  if (!data) {
     return <div>Aucune donnée disponible pour cet utilisateur.</div>;
   }
 
-  const score = userData.todayScore;
+  const score = data.todayScore;
   const scorePercentage = Math.round(score * 100);
 
     return (

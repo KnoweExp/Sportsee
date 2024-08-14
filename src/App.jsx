@@ -1,17 +1,25 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch, BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import ContainerChart from "./components/ContainerChart";
 import "./App.css";
+import { StoreProvider } from "./components/Store";
 
 
 function App() {
   return (
-    <div className="app">
-      <Header />
-      <div className="main-content">
-        <ContainerChart />
+    <StoreProvider>
+      <BrowserRouter>
+      <div className="app">
+
+        <Header />
+        <div className="main-content">
+          <ContainerChart />
+        </div>
       </div>
-    </div>
+      </BrowserRouter>
+    </StoreProvider>
   );
 }
 

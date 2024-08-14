@@ -1,18 +1,17 @@
-
-export const formatUserActivity = (activities, userId) => {
-    const userActivity = activities.find(activity => activity.userId === userId);
-    if (!userActivity) {
-      return [];
+export const formatUserActivity = (data) => {
+    if (!data || !Array.isArray(data.sessions)) {
+        console.error("data.sessions n'est pas un tableau:", data);
+        return [];
     }
-  
-    return userActivity.sessions.map(session => ({
-      day: session.day,
-      kilogram: session.kilogram,
-      calories: session.calories,
-    }));
-  };
 
-  export const formatUserAverageSessions = (sessions, userId) => {
+    return data.sessions.map(session => ({
+        day: session.day,
+        kilogram: session.kilogram,
+        calories: session.calories,
+    }));
+};
+
+export const formatAverageSessions = (data) => {
     const dayMap = {
         1: 'L',
         2: 'M',
@@ -22,35 +21,35 @@ export const formatUserActivity = (activities, userId) => {
         6: 'S',
         7: 'D'
     };
-    const userSessions = sessions
-      .filter(session => session.userId === userId)
-      .map(session => session.sessions.map(s => ({
-        day: dayMap[s.day] || s.day,
-        sessionLength: s.sessionLength
-      })));
-  
-    return userSessions.length ? userSessions[0] : [];
-  };
-  
 
-  export const formatUserPerformance = (performances, userId) => {
-    const userPerformance = performances
-      .filter(performance => performance.userId === userId)
-      .map(performance => performance.data.map(p => ({
-        kind: performance.kind[p.kind],
-        value: p.value
-      })));
-      
-  
-    return userPerformance.length ? userPerformance[0] : [];
-  };
-  
+    if (!data || !Array.isArray(data.sessions)) {
+        console.error("data.sessions n'est pas un tableau:", data);
+        return [];
+    }
 
-export const formatUserMainData = (userData) => {
+    return data.sessions.map(session => ({
+        day: dayMap[session.day] || session.day,
+        sessionLength: session.sessionLength,
+    }));
+};
+
+export const formatUserPerformance = (data) => {
+    if (!data || !Array.isArray(data.data)) {
+        console.error("data.data n'est pas un tableau:", data);
+        return [];
+    }
+
+    return data.data.map(p => ({
+        kind: p.kind,
+        value: p.value,
+    }));
+};
+
+export const formatUserData = (userData) => {
     return {
         id: userData.id,
         userInfos: userData.userInfos,
-        todayScore: userData.todayScore || userData.score, 
+        todayScore: userData.todayScore || userData.score,
         keyData: userData.keyData,
     };
 };
